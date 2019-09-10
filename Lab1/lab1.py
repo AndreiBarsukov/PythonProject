@@ -18,13 +18,27 @@ ownerAuto = {
 bookAuto = {
     "Владелец": ownerAuto,
     "Автомобиль": auto,
-    "Дата": "Хэтчбэк",
-    "Пробег": "",
-    "Выполненная работа": "Хэтчбэк",
-    "Материалы": "Хэтчбэк",
-    "Мастер": "Хэтчбэк",
-    "Стоимость работ": "",
-    "Примечание/рекомендации": "Хэтчбэк"
+    "Дата": [10,9,2019],
+    "Пробег, км": "150000",
+    "Выполненная работа": "Замена масла",
+    "Материалы": "Масло",
+    "Мастер": "Иванов И.И.",
+    "Стоимость работ": "2500",
+    "Примечание/рекомендации": "Хорошее масло"
 }
 
-fkfkkasdf
+
+for bookAutoKey in bookAuto:
+    if bookAutoKey == "Владелец":
+       print("\r\nВладелец авто:")
+       for ownerAutokey in ownerAuto:
+            print(ownerAutokey, "->", ownerAuto[ownerAutokey])
+    if bookAutoKey == "Автомобиль":
+        print("\r\nАвтомобиль:")
+        for autoKey in auto:
+            print(autoKey, "->", auto[autoKey])
+        print(" ")
+    elif bookAutoKey != "Владелец" and bookAutoKey != "Автомобиль":
+        print(bookAutoKey, "->", bookAuto[bookAutoKey])
+
+print(" ")
