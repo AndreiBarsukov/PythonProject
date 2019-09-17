@@ -5,7 +5,7 @@ auto = {
     "Год выпуска": "2015",
     "Регистрационный номер": "е215ва159",
     "Заводской №": "109186",
-    "Объем двигателя, см3": "1,8",
+    "Объем двигателя, см3": "1800",
     "Начальный пробег автоб, км": "158"
 }
 
@@ -102,6 +102,6 @@ for bookAutoKey in bookAuto:
                             print("\t", workKey, "->", workValue)
                 else:
                     print(dataRecordKey, "->", dataRecordValue)
-            print("\r\n".upper())  
+            print("\r\n")  
         print(" ")
 print(" ")
