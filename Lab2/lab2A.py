@@ -1,3 +1,4 @@
+from pprint import pprint
 
 #Данные об авто
 auto = {
@@ -5,7 +6,7 @@ auto = {
     "Год выпуска": "2015",
     "Регистрационный номер": "е215ва159",
     "Заводской №": "109186",
-    "Объем двигателя, см3": "1800",
+    "Объем двигателя, л": "1.8",
     "Начальный пробег автоб, км": "158"
 }
 
@@ -75,33 +76,6 @@ bookAuto = {
     "Технический осмотр": [recordBookAuto1, recordBookAuto2]
 }
 
-for bookAutoKey in bookAuto:
-    #вывод данных о владельце
-    if bookAutoKey == "Владелец":
-       print("\r\n\tВладелец авто:".upper())
-       owner = bookAuto[bookAutoKey]
-       for ownerKey in owner:
-            print(ownerKey, "->", owner[ownerKey])
-    #вывод данных об автомобиле владельца
-    elif bookAutoKey == "Автомобиль":
-        print("\r\n\tАвтомобиль:".upper())
-        auto = bookAuto[bookAutoKey]
-        for autoKey, autoValue in auto.items():
-            print(autoKey, "->", autoValue)
-        print(" ")
-    #вывод данных о тех. осмотрах автомобиля
-    elif bookAutoKey == "Технический осмотр":
-        print("\r\n\tТехнические осмотры:".upper())
-        recordBook = bookAuto[bookAutoKey]
-        #Перебор списка записей о ТО
-        for record in recordBook:
-            for dataRecordKey, dataRecordValue in record.items():
-                if dataRecordKey == "Проделанные работы":
-                    for works in dataRecordValue:
-                        for workKey, workValue in works.items():
-                            print("\t", workKey, "->", workValue)
-                else:
-                    print(dataRecordKey, "->", dataRecordValue)
-            print("\r\n")  
-        print(" ")
-print(" ")
+
+
+pprint(bookAuto)
