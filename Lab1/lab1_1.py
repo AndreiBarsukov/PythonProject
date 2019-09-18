@@ -62,7 +62,7 @@ def BeautPrint(book):
             print("История техобслуживания в книге " + book["Марка автомобиля"] + " " + book["Модель автомобиля"] + " " + book["Заводской №"] + ":")
             PrintHistorySer(elem)
         else:
-            print(key, " - ", elem)
+            print(str(key) + " - " +  str(elem))
 
 newBook = CreateBook("Легковой",
     "5550-1235-6611",
