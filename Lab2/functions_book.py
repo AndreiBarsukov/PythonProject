@@ -1,4 +1,3 @@
-
 # Функция создания сервисной книги
 def сreate_book(**ownerAuto):
     book = {
