@@ -1,14 +1,6 @@
 from pprint import pprint
 from datetime import date
-
-# Функция создания сервисной книги
-def сreateBook(**ownerAuto):
-    book = {
-        "Владелец": ownerAuto["owner"],
-        "Автомобиль": ownerAuto["auto"], 
-        "Технический осмотр": list()
-    }
-    return book
+import functionsBook as fBook
 
 # Данные для создания книги
 dataOwner = {"owner" : {
@@ -27,7 +19,7 @@ dataOwner = {"owner" : {
 }
 
 # Вызов метода по созданию сервисной книги
-book = сreateBook(**dataOwner)
+book = fBook.сreateBook(**dataOwner)
 
 # Вывод данных сервисной книги
 pprint(book)
