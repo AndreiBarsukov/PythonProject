@@ -54,53 +54,6 @@ class Auto(Service):
     def __str__(self):
         return "Автомобиль (Модель = " + self.model + ", Год выпуска = " + self.year + ", Регистрационный номер = " + self.regNumber + ", Заводской номер = " + self.factoryNumber + ", Объем двигателя = " + self.engineVolume + ", Начальный пробег = " + self.startMileage + ")"
 
-class Book(Service):
-    """
-    Сервисная книжка автомобиля, содержащая информацию о:
-    владельце, автомобиле и записях о тех. осмотрах
-    
-    """
-
-    def __init__(self, owner, auto, records):
-        if (isinstance(owner, Owner) and isinstance(auto, Auto) and isinstance(records, Record)):
-            self.owner = owner
-            self.auto = auto
-            self.records = records
-        else:
-            raise Exception("Не соответсвие типов передавемых данных!")
-    
-    def addRecord(self):
-        pass
-
-    def __repr__(self):
-        return {"owner": self.owner.__repr__(), "auto": self.auto.__repr__(), "records": self.records.__repr__()}   
-    def __str__(self):
-        return "Автомобиль (Владелец автомобиля = " + self.owner + ", Автомобиль = " + self.auto + ", Технические осмотры = " + self.records + ")"
-
-class Record(Service):
-    """
-    Записи о тех. осмотрах автомобиля, содержащие информацию о:
-    дате ТО, текущем пробеге автомобиля, проделанных работах и коментарии о ТО
-    
-    """
-
-    def __init__(self, date, millage, works, recomendation):
-        self.date = date
-        self.millage = millage
-        if (isinstance(works, Work)):
-            self.works = works
-        else:
-            raise Exception("Не соответсвие типов передавемых данынх!")
-        self.recomendation = recomendation
-
-    def addWork(self):
-        pass
-
-    def __repr__(self):
-        return {"date": self.date, "millage": self.millage, "works": self.works.__repr__(), "recomendation": self.recomendation}   
-    def __str__(self):
-        return "Технический осмотр (Дата = " + self.date + ", Текущий пробег = " + self.millage + ", Проделанные работы = " + self.works + ", Коментарий = " + self.recomendation + ")"
-
 class Work(Service):
     """
     Работы проделанные на тех. осмотре, содержащие информацию о:
@@ -119,7 +72,88 @@ class Work(Service):
     def __str__(self):
         return "Проделанная работа (Наименование работы = " + self.nameWork + ", Использованные материалы = " + self.materials + ", Проделанные работы = " + self.master + ", Стоимость = " + self.price + ")"
 
+class Record(Service):
+    """
+    Записи о тех. осмотрах автомобиля, содержащие информацию о:
+    дате ТО, текущем пробеге автомобиля, проделанных работах и коментарии о ТО
+    
+    """
+
+    def __init__(self, date, millage, works, recomendation):
+        self.date = date
+        self.millage = millage
+        if (isinstance(works, Work)):
+            self.works = works
+        else:
+            raise Exception("Не соответсвие типов передавемых данынх!")
+        self.recomendation = recomendation
+
+    def __repr__(self):
+        return {"date": self.date, "millage": self.millage, "works": self.works.__repr__(), "recomendation": self.recomendation}   
+    def __str__(self):
+        return "Технический осмотр (Дата = " + self.date + ", Текущий пробег = " + self.millage + ", Проделанные работы = " + self.works + ", Коментарий = " + self.recomendation + ")"
+
+class Book(Service):
+    """
+    Сервисная книжка автомобиля, содержащая информацию о:
+    владельце, автомобиле и записях о тех. осмотрах
+    
+    """
+
+    def __init__(self, owner, auto, records):
+        if (isinstance(owner, Owner) and isinstance(auto, Auto) and isinstance(records, Record)):
+            self.__owner = owner
+            self.__auto = auto
+            self.__records = records
+        else:
+            raise Exception("Не соответсвие типов передавемых данных!")
+    
+    @property
+    def owner(self):
+        return self.__owner
+    @property
+    def auto(self):
+        return self.__auto
+    @property
+    def records(self):
+        return self.__records
+
+    @owner.setter
+    def owner(self, owner):
+        if (isinstance(owner, Owner)):
+            self.__owner = owner
+        else:
+            raise Exception("Передаваемый объект не является типом класса *Owner*!")
+    @auto.setter
+    def auto(self, auto):
+        if (isinstance(auto, Auto)):
+            self.__auto = auto
+        else:
+            raise Exception("Передаваемый объект не является типом класса *Auto*!")
+    @records.setter
+    def records(self, records):
+        if (isinstance(records, Record)):
+            self.__records = records
+        else:
+            raise Exception("Передаваемый объект не является типом класса *Record*!")
+            
+
+
+
+    def addRecords(self):
+        pass
+
+    def __repr__(self):
+        return {"owner": self.__owner.__repr__(), "auto": self.__auto.__repr__(), "records": self.__records.__repr__()}   
+    def __str__(self):
+        return "Автомобиль (Владелец автомобиля = " + self.__owner + ", Автомобиль = " + self.__auto + ", Технические осмотры = " + self.__records + ")"
+
+
 # endregion
+
+# Иллюстрация полиморфизма с функцией - общий метод вывода данных
+def showDataClass(classObj):
+    pprint(classObj.__repr__())
 
 # region Блок тестирования модуля
 def test():
@@ -129,20 +163,12 @@ def test():
     record = Record(date(2019,8,18), "17500",  work, "Машина в отличном состоянии")
     book = Book(owner, auto, record)
 
-    # Иллюстрация полиморфизма с функцией
-    def showDataClass(classObj):
-        pprint(classObj.__repr__())
 
-    # Mro - позволяет получить иерархию наследования классов
+
+    # mro - позволяет получить иерархию наследования классов
     pprint(Book.mro())
     showDataClass(book)
 
-    """
-    pprint(owner.__repr__())
-    pprint(auto.__repr__())
-    pprint(work.__repr__())
-    pprint(record.__repr__())
-    """
 
 if __name__ == "__main__":
     test()
