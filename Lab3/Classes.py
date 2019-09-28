@@ -32,7 +32,7 @@ class Owner(Service):
     def __repr__(self):        
         return 'Owner({!r},{!r},{!r},{!r})'.format(self.fullName, self.address, self.phoneNum, self.email)
     def __str__(self):
-        return "\n ФИО = {}, \n Возраст = {}, \n Номер телефона = {}, \n Е-mail = {})".format(self.fullName, self.address, self.phoneNum, self.email)
+        return "\n ФИО = {}, \n Возраст = {}, \n Номер телефона = {}, \n Е-mail = {}".format(self.fullName, self.address, self.phoneNum, self.email)
 
 class Auto(Service):
     """
@@ -52,7 +52,7 @@ class Auto(Service):
     def __repr__(self):
         return 'Auto({!r},{!r},{!r},{!r},{!r},{!r})'.format(self.model, self.year, self.regNumber, self.factoryNumber, self.engineVolume, self.startMileage)
     def __str__(self):
-        return "\n Модель =  {}, \n Год выпуска = {}, \n Регистрационный номер = {}, \n Заводской номер = {}, \n Объем двигателя = {}, \n Начальный пробег = {})".format(self.model, self.year, self.regNumber, self.factoryNumber, self.engineVolume, self.startMileage)
+        return "\n Модель =  {}, \n Год выпуска = {}, \n Регистрационный номер = {}, \n Заводской номер = {}, \n Объем двигателя = {}, \n Начальный пробег = {}".format(self.model, self.year, self.regNumber, self.factoryNumber, self.engineVolume, self.startMileage)
 
 class Work(Service):
     """
@@ -88,7 +88,7 @@ class Record(Service):
     def __repr__(self):
         return 'Record({!r},{!r},{},{!r})'.format(self.date, self.millage, self.works.__repr__(), self.recomendation)        
     def __str__(self):
-        return '\n Дата = {}, \n Текущий пробег = {}, \n Проделанные работы: {} Коментарий = {})\n'.format(self.date, self.millage, ''.join(str(x) for x in self.works), self.recomendation )
+        return '\n Дата = {}, \n Текущий пробег = {}, \n Проделанные работы: {} Коментарий = {}\n'.format(self.date, self.millage, ''.join(str(x) for x in self.works), self.recomendation )
 
     def addWork(self, newWork):
         if (isinstance(newWork, Work)):
@@ -150,7 +150,7 @@ class Book(Service):
         return "Book({},{},{})".format(self.__owner.__repr__(), self.__auto.__repr__(), self.__records.__repr__())
     
     def __str__(self):
-        return "\nВладелец автомобиля: {}, \n\nАвтомобиль: {}, \n\nТехнические осмотры: {})".format(self.__owner, self.__auto, ''.join(str(x) for x in self.__records))
+        return "\nВладелец автомобиля: {}, \n\nАвтомобиль: {}, \n\nТехнические осмотры: {}".format(self.__owner, self.__auto, ''.join(str(x) for x in self.__records))
 
 
 # endregion
@@ -178,9 +178,23 @@ def test():
     
     # mro - позволяет получить иерархию наследования классов
     #pprint(Book.mro())
-    showDataClass(book)  
+    #showDataClass(book)  
     
-    book2 = Book(
+    book = Book(owner, auto, record)
+
+    print(book)
+
+    
+    book.addRecords(Record())
+    book.records[1] = Record(date(2019, 10, 10), "21400", [Work("Ремонт двигателя", "Новые детали", "Иванов Петр Иванович", "20000")], "Водить осторожнее")
+    work4 = Work("Замена бампера", "R-38-01", "Иванов Петр Иванович", "8000")
+    book.records[1].addWork(work4)
+
+    print(book)
+
+
+    
+    """book2 = Book(
     Owner('Иванов Иван Иванович','г.Пермь, ул. Попова, 20','88888888888','email@email.com'),
     Auto('Ford Mustang gt500','2018','в500ся','500500','1.8','15000'),
         [
@@ -203,7 +217,7 @@ def test():
             '1')
         ])
     print(book2)
-    
+    """
 if __name__ == "__main__":
     test()
 # endregion
