@@ -4,6 +4,9 @@ from pprint import pprint
 
 import functions_book as fBook
 
+import Classes as classesOur
+
+
 # Данные для создания книги
 dataOwner = {"auto": {
         "Модель": "Lada Vesta",
@@ -64,7 +67,12 @@ fBook.add_work(book,
                price="30000")
 
 # Вывод данных сервисной книги
-pprint(book)
+#pprint(book)
+
+book = classesOur.Owner("fff", "ee", "gf", "d")
+
+classesOur.showDataClass(book)
+
 
 """Исправления по PEP8:
     - Наличие лишних пробелов перед символом ":", а также их отсутсвие после,
@@ -76,3 +84,5 @@ pprint(book)
     - Лишние пробелы вокруг символа "=" в параметрах функций
 
 """
+
+
