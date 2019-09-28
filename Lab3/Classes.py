@@ -1,3 +1,4 @@
+from pprint import pprint
 
 # region Блок определения классов
 class Owner():
@@ -8,6 +9,11 @@ class Owner():
         self.address = address
         self.phoneNum = phoneNum
         self.email = email
+
+    def __repr__(self):
+        return {"name": self.fullName, "age": self.address, "phoneNum": self.phoneNum, "email": self.email}
+    def __str__(self):
+        return "Владелец (ФИО = " + self.fullName + ", Возраст = " + self.address + ", Номер телефона = " + self.phoneNum + ", Е-mail = " + self.email + ")"
 
 class Auto():
     # Класс, определяющий автомобили владельцев
@@ -48,4 +54,17 @@ class Work():
         self.price = price
 # endregion
 
+# region Блок тестирования модуля
+def test():
+    owner = Owner("owner", "2", "3", "4")
+    auto = Auto("auto", "1", "1", "1", "1", "1")
+    work = Work("word", "4", "4", "4")
+    record = Record("record", "3", "3", "3")
+    book = Book(owner, auto, record)
 
+    pprint(owner.__repr__())
+
+
+if __name__ == "__main__":
+    test()
+# endregion
