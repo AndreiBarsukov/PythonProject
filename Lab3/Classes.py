@@ -82,7 +82,7 @@ class Record(Service):
     def __init__(self, date="", millage="", works=[Work()], recomendation=""):
         self.date = date
         self.millage = millage        
-        self.works = works        
+        self.works = list(works)        
         self.recomendation = recomendation
 
     def __repr__(self):
@@ -162,36 +162,27 @@ def showDataClass(classObj):
 # region Блок тестирования модуля
 def test():
     pass
-    """owner = Owner("Иванов Иван Иванович", "г.Пермь, ул. Попова, 20", "88888888888", "email@email.com")
-    auto = Auto("Ford Mustang gt500", "2018", "в500ся", "500500", "1.8", "15000")
-    work = Work("Замена масла", "Масло", "Петров Петр Петрович", "150")
-    work2 = Work("2", "Новое", "Владимир Константинович Ватников", "15550")
-    work3 = Work("3", "Старно", "Иванов Петр Иванович", "5450")
-    work4 = Work("4", "Что то еще", "Кто-то Ктоевич Ктотов", "100")
-    record = Record(date(2019,8,18), "17500",  [work, work2], "Машина в отличном состоянии")
-
+    owner = Owner("Сидоров Сидр Сидорович", "г.Пермь, ул. Уральская, 20", "89999999999", "email@ya.ru")
+    auto = Auto("DeLorean DMC-12", "1982", "в600ся", "600600", "2.8", "1250000")
+    work = Work("Замена масла", "Масло", "Шуриков Анатолий Иванович", "150")
+    work2 = Work("Замена колодок", "Колодки", "Шушиков Иван Сергеевич", "500")
+    record = Record(date(2019,8,18), "1250350",  [work, work2], "Раритет, а не машина")
     book = Book(owner, auto, [record])
-    rec1 = Record(date(2019,8,18), "1", [work2], "1" )
-    book.addRecords(rec1)
+    showDataClass(book)
+
+    work3 = Work("Замена тормозных дисков", "Тормозные диски", "Шушиков Иван Сергеевич", "1500")
+    record1 = Record(date(2019,8,25), "1250680", list(), "Пора на свалку" )
+    book.addRecords(record1)
+    print("\n")
+    showDataClass(book)
     book.records[1].addWork(work3)
-    book.records[1].addWork(work4)
-    #print(book)
+    print("\n")
+    showDataClass(book)
     
     # mro - позволяет получить иерархию наследования классов
-    #pprint(Book.mro())
-    #showDataClass(book)  
-    
-    book = Book(owner, auto, record)
-
-    print(book)
-    
-    book.addRecords(Record())
-    book.records[1] = Record(date(2019, 10, 10), "21400", [Work("Ремонт двигателя", "Новые детали", "Иванов Петр Иванович", "20000")], "Водить осторожнее")
-    work4 = Work("Замена бампера", "R-38-01", "Иванов Петр Иванович", "8000")
-    book.records[1].addWork(work4)
-
-    print(book)
-   """
+    print("\n")
+    pprint(Book.mro())
+   
    
 if __name__ == "__main__":
     test()

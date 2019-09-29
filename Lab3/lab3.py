@@ -4,7 +4,7 @@ from pprint import pprint
 
 import Classes as classesOur
 
-def test():
+def main():
     book = classesOur.Book()
     print(book) #Вызов 3 - пустая структура
     owner = classesOur.Owner("Иванов Иван Иванович", "г.Пермь, ул. Попова, 20", "88888888888", "email@email.com")
@@ -26,7 +26,7 @@ def test():
     classesOur.showDataClass(book) # Вывод 2 - вывод структуры через метод __repr__
 
 if __name__ == "__main__":
-    test()
+    main()
 
 
 """
