@@ -2,7 +2,6 @@ from datetime import date
 
 from pprint import pprint
 
-
 # region Блок определения классов
 class Service():
     """
@@ -82,7 +81,7 @@ class Record(Service):
     def __init__(self, date="", millage="", works=[Work()], recomendation=""):
         self.date = date
         self.millage = millage        
-        self.works = list(works)        
+        self.works = works        
         self.recomendation = recomendation
 
     def __repr__(self):
@@ -148,10 +147,8 @@ class Book(Service):
 
     def __repr__(self):
         return "Book({},{},{})".format(self.__owner.__repr__(), self.__auto.__repr__(), self.__records.__repr__())
-    
     def __str__(self):
         return "\nВладелец автомобиля: {}, \n\nАвтомобиль: {}, \n\nТехнические осмотры: {}".format(self.__owner, self.__auto, ''.join(str(x) for x in self.__records))
-
 
 # endregion
 
@@ -182,7 +179,6 @@ def test():
     # mro - позволяет получить иерархию наследования классов
     print("\n")
     pprint(Book.mro())
-   
    
 if __name__ == "__main__":
     test()
