@@ -2,28 +2,67 @@ from datetime import date
 
 from pprint import pprint
 
-import Classes as classesOur
+import service_book as serv_book
 
 def main():
-    book = classesOur.Book()
+    book = serv_book.Book()
     print(book) #Вызов 3 - пустая структура
-    owner = classesOur.Owner("Иванов Иван Иванович", "г.Пермь, ул. Попова, 20", "88888888888", "email@email.com")
-    auto = classesOur.Auto("Ford Mustang gt500", "2018", "в500ся", "500500", "1.8", "15000")
-    work = classesOur.Work("Замена масла", "Масло", "Петров Петр Петрович", "150")
-    work2 = classesOur.Work("Смена шин", "Зимние шины", "Петров Петр Петрович", "12000")
-    record = classesOur.Record(date(2019,8,18), "17500",  [work, work2], "Машина в отличном состоянии")
+    owner = serv_book.Owner(
+        "Иванов Иван Иванович", 
+        "г.Пермь, ул. Попова, 20", 
+        "88888888888", 
+        "email@email.com")
+    auto = serv_book.Auto(
+        "Ford Mustang gt500", 
+        "2018", 
+        "в500ся", 
+        "500500", 
+        "1.8", 
+        "15000")
+    work = serv_book.Work(
+        "Замена масла", 
+        "Масло", 
+        "Петров Петр Петрович", 
+        "150")
+    work2 = serv_book.Work(
+        "Смена шин", 
+        "Зимние шины", 
+        "Петров Петр Петрович", 
+        "12000")
+    record = serv_book.Record(
+        date(2019,8,18), 
+        "17500",  
+        [work, work2], 
+        "Машина в отличном состоянии")
     
-    book = classesOur.Book(owner, auto, [record])
+    book = serv_book.Book(owner, auto, [record])
     print(book) #Вызов 4 - заполнили начальными данными
     
-    book.addRecords(classesOur.Record())
-    book.records[1] = classesOur.Record(date(2019, 10, 10), "21400", [classesOur.Work("Ремонт двигателя", "Новые детали", "Иванов Петр Иванович", "20000")], "Водить осторожнее")
-    work4 = classesOur.Work("Замена бампера", "R-38-01", "Иванов Петр Иванович", "8000")
+    book.addRecords(serv_book.Record())
+    book.records[1] = serv_book.Record(
+        date(2019, 10, 10), 
+        "21400", 
+        [serv_book.Work(
+            "Ремонт двигателя", 
+            "Новые детали", 
+            "Иванов Петр Иванович", 
+            "20000")], 
+        "Водить осторожнее")
+    work4 = serv_book.Work(
+        "Замена бампера", 
+        "R-38-01", 
+        "Иванов Петр Иванович", 
+        "8000")
     book.records[1].addWork(work4)
-    print(book) #Вызов 5 - добавили элементы
 
-    pprint(classesOur.Book.mro()) # Вывод 1 - вывод иерархии наследования
-    classesOur.showDataClass(book) # Вывод 2 - вывод структуры через метод __repr__
+    # Вызов 5 - добавили элементы
+    print(book) 
+
+    # Вывод 1 - вывод иерархии наследования
+    pprint(serv_book.Book.mro()) 
+    
+    # Вывод 2 - вывод структуры через метод __repr__
+    serv_book.showDataClass(book) 
 
 if __name__ == "__main__":
     main()

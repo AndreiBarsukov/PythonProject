@@ -1,6 +1,6 @@
 from datetime import date
-
 from pprint import pprint
+
 
 # region Блок определения классов
 class Service():
@@ -27,16 +27,28 @@ class Owner(Service):
         self.address = address
         self.phoneNum = phoneNum
         self.email = email
-    #{!r} - внутреннее представление ('test1') {!s} - человеческое представление (test1)
+    # {!r} - внутреннее представление ('test1') {!s} - человеческое представление (test1)
     def __repr__(self):        
-        return 'Owner({!r},{!r},{!r},{!r})'.format(self.fullName, self.address, self.phoneNum, self.email)
+        return 'Owner({!r},{!r},{!r},{!r})'.format(
+                self.fullName, 
+                self.address, 
+                self.phoneNum, 
+                self.email)
     def __str__(self):
-        return "\n ФИО = {}, \n Возраст = {}, \n Номер телефона = {}, \n Е-mail = {}".format(self.fullName, self.address, self.phoneNum, self.email)
+        return """\n ФИО = {},
+                Возраст = {},
+                Номер телефона = {},
+                Е-mail = {}""".format(
+                    self.fullName,
+                    self.address, 
+                    self.phoneNum, 
+                    self.email)
 
 class Auto(Service):
     """
     Автомобиль владельца, содержит информацию о:
-    модели, годе выпуска, регистрационном номере, заводском номере, объеме двигателя и начальном пробеге
+    модели, годе выпуска, регистрационном номере, 
+    заводском номере, объеме двигателя и начальном пробеге
     
     """
 
@@ -49,14 +61,32 @@ class Auto(Service):
         self.startMileage = startMileage
     
     def __repr__(self):
-        return 'Auto({!r},{!r},{!r},{!r},{!r},{!r})'.format(self.model, self.year, self.regNumber, self.factoryNumber, self.engineVolume, self.startMileage)
+        return 'Auto({!r},{!r},{!r},{!r},{!r},{!r})'.format(
+                self.model, 
+                self.year, 
+                self.regNumber, 
+                self.factoryNumber, 
+                self.engineVolume, 
+                self.startMileage)
     def __str__(self):
-        return "\n Модель =  {}, \n Год выпуска = {}, \n Регистрационный номер = {}, \n Заводской номер = {}, \n Объем двигателя = {}, \n Начальный пробег = {}".format(self.model, self.year, self.regNumber, self.factoryNumber, self.engineVolume, self.startMileage)
+        return """\n Модель =  {},
+                Год выпуска = {},
+                Регистрационный номер = {}, 
+                Заводской номер = {}, 
+                Объем двигателя = {}, 
+                Начальный пробег = {}""".format(
+                    self.model,
+                    self.year, 
+                    self.regNumber, 
+                    self.factoryNumber, 
+                    self.engineVolume, 
+                    self.startMileage)
 
 class Work(Service):
     """
     Работы проделанные на тех. осмотре, содержащие информацию о:
-    наименовании работы, используемых материалов, мастере, выполнившем работу и стоимость проделанной работы
+    наименовании работы, используемых материалов, мастере, 
+    выполнившем работу и стоимость проделанной работы
     
     """
     
@@ -67,9 +97,21 @@ class Work(Service):
         self.price = price
 
     def __repr__(self):
-        return 'Work({!r},{!r},{!r},{!r})'.format(self.nameWork, self.materials, self.master, self.price)
+        return 'Work({!r},{!r},{!r},{!r})'.format(
+                self.nameWork, 
+                self.materials, 
+                self.master, 
+                self.price)
     def __str__(self):
-        return "\n    [Наименование работы = {}, \n    Использованные материалы = {}, \n    Проделанные работы = {} \n    Стоимость = {}]\n".format(self.nameWork, self.materials, self.master, self.price)
+        return """
+                [Наименование работы = {}, 
+                Использованные материалы = {}, 
+                Проделанные работы = {} 
+                Стоимость = {}]""".format(
+                                self.nameWork, 
+                                self.materials, 
+                                self.master, 
+                                self.price)
 
 class Record(Service):
     """
@@ -85,9 +127,21 @@ class Record(Service):
         self.recomendation = recomendation
 
     def __repr__(self):
-        return 'Record({!r},{!r},{},{!r})'.format(self.date, self.millage, self.works.__repr__(), self.recomendation)        
+        return 'Record({!r},{!r},{},{!r})'.format(
+                self.date, 
+                self.millage, 
+                self.works.__repr__(), 
+                self.recomendation)        
     def __str__(self):
-        return '\n Дата = {}, \n Текущий пробег = {}, \n Проделанные работы: {} Коментарий = {}\n'.format(self.date, self.millage, ''.join(str(x) for x in self.works), self.recomendation )
+        return """
+                Дата = {}, 
+                Текущий пробег = {}, 
+                Проделанные работы: {} 
+                Коментарий = {}""".format(
+                    self.date, 
+                    self.millage, 
+                    ''.join(str(x) for x in self.works), 
+                    self.recomendation )
 
     def addWork(self, newWork):
         if (isinstance(newWork, Work)):
@@ -146,9 +200,18 @@ class Book(Service):
             raise Exception("Добавляемый объект не является типом класса *Record*!")
 
     def __repr__(self):
-        return "Book({},{},{})".format(self.__owner.__repr__(), self.__auto.__repr__(), self.__records.__repr__())
+        return "Book({},{},{})".format(
+                self.__owner.__repr__(), 
+                self.__auto.__repr__(), 
+                self.__records.__repr__())
     def __str__(self):
-        return "\nВладелец автомобиля: {}, \n\nАвтомобиль: {}, \n\nТехнические осмотры: {}".format(self.__owner, self.__auto, ''.join(str(x) for x in self.__records))
+        return """
+                Владелец автомобиля: {},
+                Автомобиль: {},
+                Технические осмотры: {}""".format(
+                    self.__owner, 
+                    self.__auto, 
+                    ''.join(str(x) for x in self.__records))
 
 # endregion
 
@@ -159,16 +222,46 @@ def showDataClass(classObj):
 # region Блок тестирования модуля
 def test():
     pass
-    owner = Owner("Сидоров Сидр Сидорович", "г.Пермь, ул. Уральская, 20", "89999999999", "email@ya.ru")
-    auto = Auto("DeLorean DMC-12", "1982", "в600ся", "600600", "2.8", "1250000")
-    work = Work("Замена масла", "Масло", "Шуриков Анатолий Иванович", "150")
-    work2 = Work("Замена колодок", "Колодки", "Шушиков Иван Сергеевич", "500")
-    record = Record(date(2019,8,18), "1250350",  [work, work2], "Раритет, а не машина")
+    owner = Owner(
+        "Сидоров Сидр Сидорович", 
+        "г.Пермь, ул. Уральская, 20", 
+        "89999999999", 
+        "email@ya.ru")
+    auto = Auto(
+        "DeLorean DMC-12", 
+        "1982", 
+        "в600ся", 
+        "600600", 
+        "2.8", 
+        "1250000")
+    work = Work(
+        "Замена масла", 
+        "Масло", 
+        "Шуриков Анатолий Иванович", 
+        "150")
+    work2 = Work(
+        "Замена колодок", 
+        "Колодки", 
+        "Шушиков Иван Сергеевич", 
+        "500")
+    record = Record(
+        date(2019,8,18), 
+        "1250350",  
+        [work, work2], 
+        "Раритет, а не машина")
     book = Book(owner, auto, [record])
     showDataClass(book)
 
-    work3 = Work("Замена тормозных дисков", "Тормозные диски", "Шушиков Иван Сергеевич", "1500")
-    record1 = Record(date(2019,8,25), "1250680", list(), "Пора на свалку" )
+    work3 = Work(
+        "Замена тормозных дисков", 
+        "Тормозные диски", 
+        "Шушиков Иван Сергеевич", 
+        "1500")
+    record1 = Record(
+        date(2019,8,25), 
+        "1250680", 
+        list(), 
+        "Пора на свалку" )
     book.addRecords(record1)
     print("\n")
     showDataClass(book)
