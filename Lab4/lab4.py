@@ -102,6 +102,25 @@ def main():
     + (book_contains[record1] == auto0)
     + (book_contains[record2] == auto2)
 
+    # Запросы к данным
+    print('\n*********** pyDatalog: получение владельцев и их авто:\n')
+    print(has_car(X, Y))
+    print('\n*********** pyDatalog: получение всех владельцев у автомобиля auto1:\n')
+    print(has_car(X, auto1))
+    print('\n*********** pyDatalog: получение списка работ для записи record0:\n')
+    print(record0 == work_included[X])
+    print('\n*********** pyDatalog: просмотр записей для автомобиля auto0:\n')
+    print(auto0 == book_contains[X])
+    print('\n*********** pyDatalog: получение владельца с номером 888....\n')
+    print(serv_book.Owner.phoneNum[X] == "88888888888") 
+    print('\n*********** pyDatalog: получение количества записей для автомобиля auto0:\n')
+    (count_records[X] == len_(Y)) <= (book_contains[Y] == X)
+    print(count_records[auto0] == Z)
+    print('\n*********** pyDatalog: получение полной информации для автомобиля auto0:\n')
+    print((book_contains[X] == Y) & (work_included[Z] == X) & (has_car(H,Y)) & (Y == auto0))
+    print('\n*********** pyDatalog: получение списка работ  для автомобиля auto0:\n')
+    (works_auto[Y] == Z) <= (book_contains[X] == Z) & (work_included[Y] == X)
+    print(works_auto[Y] == auto0)
 
     print('\n-------^^^------ pyDatalog ------^^^-------\n')
 
