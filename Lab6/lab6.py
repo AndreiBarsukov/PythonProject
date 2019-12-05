@@ -28,17 +28,47 @@ class MainWindow(QtWidgets.QMainWindow):
         self.tableWidget.setRowCount(5)
         self.tableWidget.setColumnCount(3)
 
-    # Открытие файла
-    def browse_folder(self):
-       pass
-       
     # Запись данных в очередь
     def file_gen(self):
-       pass
+        while True and not self.openFile.closed:  
+            data = self.openFile.readline()
+            if not data:
+                self.openFile.close()     
+                break            
+            #sleep(0.3)  
+            self.itemQ.put(data)
+            print("Элементов в очереди: " + str(self.itemQ.qsize()))
+
+    # Открытие файла
+    def browse_folder(self):
+        pathFile = QtWidgets.QFileDialog.getOpenFileName(self, "Выберите папку", './','CSV files(*.csv)')
+        if pathFile[0] != '':
+            self.openFile = open(pathFile[0]) 
+            #self.next_part_data()
+        t = threading.Thread(target=self.file_gen, name = "Th ")
+        t.setDaemon(True) # позволяет завершать основной поток, не дожидаясь порожденных
+        t.start()
+        self.next_part_data()
     
     # Получение следующей порции данных
     def next_part_data(self):        
-        pass
+        try:
+            print('PyQt5 button click')
+            if self.openFile == None or self.itemQ.empty():
+                raise Exception("Файл не выбран, либо полностью просмотрен!\nЗакрыть программу?")
+            self.curentRow = 0
+            for i in range(5):
+                elem = self.itemQ.get()
+                line = elem.split(",")
+                for col in range(3):
+                    self.tableWidget.setItem(i, col, QTableWidgetItem(line[col]))            
+        except Exception as identifier:
+            buttonReply = QMessageBox.question(self, 
+                                               'Warning!', 
+                                               str(identifier), 
+                                               QMessageBox.Yes)
+            if buttonReply == QMessageBox.Yes:
+                exit()
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
